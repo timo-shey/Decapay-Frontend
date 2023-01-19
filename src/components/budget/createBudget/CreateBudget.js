@@ -25,6 +25,7 @@ function CreateBudget() {
         break;
       case "ANNUAL":
         data.year = formData.budgetStartDate.split("-")[0];
+        break;
       default:
         break;
     }
@@ -35,25 +36,29 @@ function CreateBudget() {
   const createBudget = async (data) => {
     const token = localStorage.getItem("token");
 
-    const response = await axios.post(
-      "http://localhost:8082/api/v1/budgets",
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    try {
+      const response = await axios.post(
+        "http://localhost:8082/api/v1/budgets",
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    console.log(response);
+      console.log(response);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const selector = (el) => document.querySelector(el);
   useEffect(() => {
-    if (period == null) {
+    if (period === null) {
       selector(".start-date").style.display = "none";
       selector(".end-date").style.display = "none";
-    } else if (period == "CUSTOM") {
+    } else if (period === "CUSTOM") {
       selector(".start-date").style.display = "block";
       selector(".end-date").style.display = "block";
     } else {
