@@ -14,6 +14,7 @@ import BudgetCreatedDash from "./dashboard/budgetCreatedDashboard/BudgetCreatedD
 import {Routes, Route} from 'react-router-dom';
 
 import InternalLayout from "./Layout/internal_layout/InternalLayout";
+import ResetPassword from "../passwordreset/ResetPassword";
 
 
 
@@ -25,6 +26,7 @@ function App(){
             <Route path='/' element={<Homepage/>}/>
             <Route path='login' element={<Login/>}/>
             <Route path='signup' element={<SignUp/>}/>
+            <Route path="resetpassword" element={<ResetPassword />}/>
 
 
         <Route path="internal_link" element={<InternalLayout/> }>
@@ -37,7 +39,6 @@ function App(){
             <Route path='budget-list' element={<BudgetList/>} />
 
             <Route path='dashboard-budget-created' element={<BudgetCreatedDash/>} />
-
             <Route path='expenses-list' element={<ExpensesList/>} />
 
             {/* <Route path='logout' element={<BudgetCreated/>}/> */}
