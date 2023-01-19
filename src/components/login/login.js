@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./login.css";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 
 function Login() {
   const [formData, setFormData] = useState({});
@@ -26,7 +26,11 @@ function Login() {
         body: JSON.stringify(data.formData),
       });
 
-      console.log(await res.text());
+      const token = await res.text();
+
+      localStorage.setItem("token", token);
+      console.log(token);
+      redirect("internal_link/dashboard");
     } catch (error) {
       console.log(error);
     }

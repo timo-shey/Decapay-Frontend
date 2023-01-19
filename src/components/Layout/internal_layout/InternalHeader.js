@@ -1,8 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import InternalSidebar from "./internalSidebar";
 
 const InternalHeader = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+  };
+
   return (
     <header>
       <InternalSidebar />
@@ -27,9 +33,7 @@ const InternalHeader = () => {
           </button>
           {/* Brand */}
           <a className="navbar-brand" href="#!">
-          &nbsp;&nbsp;
-          &nbsp;&nbsp;
-          &nbsp;&nbsp;
+            &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
             <img
               src="/assets/cardpayment-vHf.png"
               width={50}
@@ -83,12 +87,9 @@ const InternalHeader = () => {
                   alt=""
                   loading="lazy"
                 />
-                &nbsp;&nbsp;
-                &nbsp;&nbsp;
-                &nbsp;&nbsp;
+                &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
                 <p> Patrick </p>
-                &nbsp;&nbsp;
-                &nbsp;&nbsp;
+                &nbsp;&nbsp; &nbsp;&nbsp;
               </a>
               <ul
                 className="dropdown-menu dropdown-menu-end"
@@ -100,7 +101,11 @@ const InternalHeader = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="login" className="dropdown-item">
+                  <Link
+                    to="/login"
+                    className="dropdown-item"
+                    onClick={handleLogout}
+                  >
                     Logout
                   </Link>
                 </li>
