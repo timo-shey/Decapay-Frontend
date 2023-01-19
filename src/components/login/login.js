@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import EmailModal from "../../passwordreset/EmailModal";
+import axios from "axios";
 
 function Login() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
 
   const [open, setOpen] = React.useState(false);
@@ -18,23 +20,21 @@ function Login() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    const data = { formData };
-    console.log(data.formData);
-    mainData(data);
+    mainData(formData);
   };
 
   const mainData = async (data) => {
     try {
-      const res = await fetch("http://127.0.0.1:8082/api/v1/auth/signin", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data.formData),
-      });
-      const token = await res.text();
+      const res = await axios.post(
+        "http://127.0.0.1:8082/api/v1/auth/signin",
+        data
+      );
 
+      const token = await res.data;
       localStorage.setItem("token", token);
       console.log(token);
-      redirect("internal_link/dashboard");
+
+      navigate("/internal_link/dashboard");
     } catch (error) {
       console.log(error);
     }

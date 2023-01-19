@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Homepage from "./homepage/Homepage";
 import Login from "./login/login";
 import SignUp from "./signup/SignUp";
@@ -11,42 +11,69 @@ import BudgetCategoryList from "./budgetCategory/budgetCategoryList/BudgetCatego
 import BudgetList from "./budget/budgetList/BudgetList";
 import ExpensesList from "./budgetCategory/expensesList/ExpensesList";
 import BudgetCreatedDash from "./dashboard/budgetCreatedDashboard/BudgetCreatedDash";
-import {Routes, Route} from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
+
+import axios from "axios";
 
 import InternalLayout from "./Layout/internal_layout/InternalLayout";
-import ResetPassword from "../passwordreset/ResetPassword";
 
+function App() {
+  const token = localStorage.getItem("token");
+  const [budgetList, setBudgetList] = useState([]);
 
+  useEffect(() => {
+    if (token != null) {
+      getBudgetList();
+    }
+  }, []);
 
-function App(){
-    
-    return(
+  const getBudgetList = async () => {
+    try {
+      const response = await axios.get("http://localhost:8082/api/v1/budgets", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setBudgetList(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
-        <Routes>
-            <Route path='/' element={<Homepage/>}/>
-            <Route path='login' element={<Login/>}/>
-            <Route path='signup' element={<SignUp/>}/>
-            <Route path="resetpassword" element={<ResetPassword />}/>
+  return (
+    <Routes>
+      <Route path="/" element={<Homepage />} />
+      <Route path="login" element={<Login />} />
+      <Route path="signup" element={<SignUp />} />
 
+      <Route path="internal_link" element={<InternalLayout />}>
+        <Route
+          path="dashboard"
+          element={
+            budgetList.length === 0 ? <NoBudgetCreated /> : <BudgetCreated />
+          }
+        />
+        <Route path="create-budget" element={<CreateBudget />} />
+        <Route path="budget-created" element={<BudgetCreated />} />
+        <Route
+          path="create-budget-category"
+          element={<CreateBudgetCategory />}
+        />
+        <Route path="create-category" element={<CreateCategory />} />
+        <Route path="budget-category-list" element={<BudgetCategoryList />} />
+        <Route path="budget-list" element={<BudgetList />} />
 
-        <Route path="internal_link" element={<InternalLayout/> }>
-        <Route path='dashboard' element={<NoBudgetCreated/>}/>
-            <Route path='create-budget' element={<CreateBudget/>}/>
-            <Route path='budget-created' element={<BudgetCreated/>}/>
-            <Route path='create-budget-category' element={<CreateBudgetCategory/>} />
-            <Route path='create-category' element={<CreateCategory/>} />
-            <Route path='budget-category-list' element={<BudgetCategoryList/>} />
-            <Route path='budget-list' element={<BudgetList/>} />
+        <Route
+          path="dashboard-budget-created"
+          element={<BudgetCreatedDash />}
+        />
 
-            <Route path='dashboard-budget-created' element={<BudgetCreatedDash/>} />
-            <Route path='expenses-list' element={<ExpensesList/>} />
+        <Route path="expenses-list" element={<ExpensesList />} />
 
-            {/* <Route path='logout' element={<BudgetCreated/>}/> */}
-        </Route>
-
-        </Routes>
-    );
-        
+        {/* <Route path='logout' element={<BudgetCreated/>}/> */}
+      </Route>
+    </Routes>
+  );
 }
 
 export default App;

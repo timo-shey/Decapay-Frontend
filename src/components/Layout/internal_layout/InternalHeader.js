@@ -7,6 +7,7 @@ const InternalHeader = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    navigate("/login");
   };
 
   return (
@@ -101,13 +102,9 @@ const InternalHeader = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/login"
-                    className="dropdown-item"
-                    onClick={handleLogout}
-                  >
+                  <a className="dropdown-item" onClick={handleLogout}>
                     Logout
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </li>

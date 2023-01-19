@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./SignUp.css";
-import { Link, redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function SignUp() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
 
   //Post Method
@@ -26,7 +27,7 @@ function SignUp() {
         formData
       );
       console.log(response);
-      redirect("/login");
+      navigate("/login");
     } catch (error) {
       console.log(error.message);
     }
