@@ -5,28 +5,28 @@ import EmailModal from "../../passwordreset/EmailModal";
 
 
 function Login() {
-
+  const [formData, setFormData] = useState({});
+  
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-
-  const [formData, setFormData] = useState({});
-
-  const handleChange = (e) =>{
+  const handleChange = (e) => {
     e.persist();
-    const{ name,value } = e.target;
-    setFormData({...formData,[name]: value})
-  }
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
     const data = { formData };
     console.log(data.formData);
     mainData(data);
-  }
+  };
 
-  const mainData = async (data)=> {
+
+  const mainData = async (data) => {
+
     try {
       const res = await fetch("http://127.0.0.1:8082/api/v1/auth/signin", {
         method: "POST",
@@ -34,10 +34,10 @@ function Login() {
         body: JSON.stringify(data.formData),
       });
 
-      console.log(await res.json());
+
+      console.log(await res.text());
     } catch (error) {
       console.log(error);
-
     }
   };
 
@@ -89,11 +89,23 @@ function Login() {
                     </div>
                     <p className="forgot-password-L4H"><a href="#!" onClick={handleOpen}>Forgot password?</a></p>
                   </div>
+
                   <p className="dont-have-an-account-create-account-GTj">
               <span>
                 Don’t have an account?
               </span>
                     {/* <span class="dont-have-an-account-create-account-GTj-sub-0">
+                  <input
+                    class="frame-3-dvZ"
+                    value="Sign In"
+                    type="submit"
+                    onClick={handleClick}
+                  />
+                </div>
+                <p class="forgot-password-L4H">Forgot password?</p>
+              </div>
+              <p class="dont-have-an-account-create-account-GTj">
+                <span class="dont-have-an-account-create-account-GTj-sub-0">
                   Don’t have an account?{" "}
                 </span> */}
                     <Link to="/signup">
