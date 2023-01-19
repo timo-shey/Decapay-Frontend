@@ -3,35 +3,32 @@ import "./login.css";
 import { Link } from "react-router-dom";
 
 function Login() {
+  const [formData, setFormData] = useState({});
 
-  const [formData, setFormData] = useState({});  
-
-  const handleChange = (e) =>{
+  const handleChange = (e) => {
     e.persist();
-    const{ name,value } = e.target;
-    setFormData({...formData,[name]: value})
-  }
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
     const data = { formData };
     console.log(data.formData);
     mainData(data);
-  }
+  };
 
- 
-   const mainData = async (data)=> {
+  const mainData = async (data) => {
     try {
-    const res = await fetch("http://127.0.0.1:8082/api/v1/auth/signin", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data.formData),
-    });
-    
-    console.log(await res.json());
+      const res = await fetch("http://127.0.0.1:8082/api/v1/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data.formData),
+      });
+
+      console.log(await res.text());
     } catch (error) {
       console.log(error);
-      
     }
   };
 
@@ -78,7 +75,12 @@ function Login() {
                       <p class="remember-login-WL9">Remember login</p>
                     </div>
                   </div>
-                  <input class="frame-3-dvZ" value="Sign In" type="submit" onClick={handleClick} />
+                  <input
+                    class="frame-3-dvZ"
+                    value="Sign In"
+                    type="submit"
+                    onClick={handleClick}
+                  />
                 </div>
                 <p class="forgot-password-L4H">Forgot password?</p>
               </div>
