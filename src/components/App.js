@@ -20,6 +20,9 @@ import InternalLayout from "./Layout/internal_layout/InternalLayout";
 function App() {
   const token = localStorage.getItem("token");
   const [budgetList, setBudgetList] = useState([]);
+  const [lineitems, setLineItems] = useState(false);
+
+  console.log(lineitems);
 
   useEffect(() => {
     if (token != null) {
@@ -35,6 +38,14 @@ function App() {
         },
       });
       setBudgetList(response.data);
+      setLineItems(
+        response.data.length > 0
+          ? response.data.reverse()[0].lineItemRests.length > 0
+            ? true
+            : false
+          : false
+      );
+      console.log(response.data);
     } catch (error) {
       console.log(error.message);
     }
@@ -50,7 +61,13 @@ function App() {
         <Route
           path="dashboard"
           element={
-            budgetList.length === 0 ? <NoBudgetCreated /> : <BudgetCreated />
+            budgetList.length === 0 ? (
+              <NoBudgetCreated />
+            ) : lineitems ? (
+              <BudgetCreatedDash />
+            ) : (
+              <BudgetCreated />
+            )
           }
         />
         <Route path="create-budget" element={<CreateBudget />} />

@@ -1,11 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./BudgetCreatedDash.css";
 import { Calendar } from "react-calendar";
 import LineItemModal from "../../modals/LineItemModals";
+import axios from "axios";
 
 function BudgetCreatedDash() {
+  const token = localStorage.getItem("token");
+
   const [value, onChange] = useState(new Date());
   const [itemModal, setItemModal] = useState(false);
+
+  const [budgetItem, setBudgetItem] = useState({});
+  const [budgetLineItemList, setBudgetLineItemList] = useState([]);
+
+  useEffect(() => {
+    if (token !== null) {
+      getBudgetItem();
+    }
+  }, []);
+
+  const getBudgetItem = async () => {
+    try {
+      const response = await axios.get("http://localhost:8082/api/v1/budgets", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const item = response.data.reverse()[0];
+      setBudgetItem(item);
+      setBudgetLineItemList(item.lineItemRests);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const createBudgetHandler = () => {
     setItemModal(true);
@@ -25,7 +52,7 @@ function BudgetCreatedDash() {
                       <div className="rectangle-2-GK3"></div>
                       <div className="frame-8625-Qg9">
                         <div className="my-budget-Y1f">My Budget</div>
-                        <div className="n3000000-TPX">N30,000.00</div>
+                        <div className="n3000000-TPX">N{budgetItem.amount}</div>
                       </div>
                       <img
                         className="ellipse-3-BaR"
@@ -42,7 +69,9 @@ function BudgetCreatedDash() {
                             <br />
                             spent
                           </div>
-                          <div className="n20000-1Sy">N20,000</div>
+                          <div className="n20000-1Sy">
+                            N{budgetItem.totalAmountSpent}
+                          </div>
                         </div>
                         <img
                           className="frame-8759-wrR"
@@ -53,7 +82,9 @@ function BudgetCreatedDash() {
                     <div className="frame-8764-Tpm">
                       <div className="frame-8763-1LV">
                         <div className="percentage-xmX">Percentage</div>
-                        <div className="item-375-Hoo">3.75%</div>
+                        <div className="item-375-Hoo">
+                          {budgetItem.percentage}%
+                        </div>
                       </div>
                       <img
                         className="frame-8762-2Fb"
@@ -64,7 +95,7 @@ function BudgetCreatedDash() {
                 </div>
                 <div className="calendar-2022-839-2022-month-05-may-LXB">
                   <div className="header-fJZ">
-                    <div className="calendar-2022-839-atoms-head-mcV">May</div>
+                    {/* <div className="calendar-2022-839-atoms-head-mcV">May</div> */}
                   </div>
                   <div>
                     <Calendar onChange={onChange} value={value} />
@@ -72,42 +103,45 @@ function BudgetCreatedDash() {
                   </div>
                 </div>
               </div>
-              <div className="frame-8771-Kww">
-                <div className="frame-8747-sTf">
-                  <div className="frame-8745-nad">
-                    <div className="groceries-KaZ">Groceries</div>
-                    <div className="projected-amount-n5500-TRs">
-                      <span className="projected-amount-n5500-TRs-sub-0">
-                        Projected amount -{" "}
-                      </span>
-                      <span className="projected-amount-n5500-TRs-sub-1">
-                        N5,500
-                      </span>
-                    </div>
-                    <div className="frame-8751-Y5w">
-                      <div className="amount-so-far-n2500-hUd">
-                        <span className="amount-so-far-n2500-hUd-sub-0">
-                          Amount so far -{" "}
+              {budgetLineItemList.map((item) => (
+                <div key={item.lineItemId} className="frame-8771-Kww">
+                  <div className="frame-8747-sTf">
+                    <div className="frame-8745-nad">
+                      <div className="groceries-KaZ">{item.category}</div>
+                      <div className="projected-amount-n5500-TRs">
+                        <span className="projected-amount-n5500-TRs-sub-0">
+                          Projected amount -{" "}
                         </span>
-                        <span className="amount-so-far-n2500-hUd-sub-1">
-                          N2,500
+                        <span className="projected-amount-n5500-TRs-sub-1">
+                          N{item.projectedAmount}
                         </span>
                       </div>
-                      <div className="view-expenses-fZs">View expenses</div>
+                      <div className="frame-8751-Y5w">
+                        <div className="amount-so-far-n2500-hUd">
+                          <span className="amount-so-far-n2500-hUd-sub-0">
+                            Amount so far -{" "}
+                          </span>
+                          <span className="amount-so-far-n2500-hUd-sub-1">
+                            N{item.amountSpentSoFar}
+                          </span>
+                        </div>
+                        <div className="view-expenses-fZs">View expenses</div>
+                      </div>
+                    </div>
+                    <div className="frame-8746-nPb">
+                      <div className="frame-8639-XMB">
+                        <div className="log-ewb">Log</div>
+                        <img
+                          className="arrow-up-right-xSV"
+                          src="./assets/arrow-up-right-PXP.png"
+                        />
+                      </div>
+                      <div className="item-375-s3f">
+                        {item.percentageSpentSoFar}%
+                      </div>
                     </div>
                   </div>
-                  <div className="frame-8746-nPb">
-                    <div className="frame-8639-XMB">
-                      <div className="log-ewb">Log</div>
-                      <img
-                        className="arrow-up-right-xSV"
-                        src="./assets/arrow-up-right-PXP.png"
-                      />
-                    </div>
-                    <div className="item-375-s3f">3.75%</div>
-                  </div>
-                </div>
-                <div className="frame-8771-MjX">
+                  {/* <div className="frame-8771-MjX">
                   <div className="frame-8745-Up9">
                     <div className="transportation-1p5">Transportation</div>
                     <div className="projected-amount-n5500-wxd">
@@ -140,8 +174,8 @@ function BudgetCreatedDash() {
                     </div>
                     <div className="item-375-XLV">3.75%</div>
                   </div>
-                </div>
-                <div className="frame-8770-DUD">
+                </div> */}
+                  {/* <div className="frame-8770-DUD">
                   <div className="frame-8745-kDF">
                     <div className="clothing-gch">Clothing</div>
                     <div className="projected-amount-n5500-E8R">
@@ -174,8 +208,9 @@ function BudgetCreatedDash() {
                     </div>
                     <div className="item-375-DgV">3.75%</div>
                   </div>
+                </div> */}
                 </div>
-              </div>
+              ))}
             </div>
             <div className="frame-8754-Jhw">
               <img className="plus-dVK" src="./assets/plus-fJR.png" />
@@ -188,15 +223,13 @@ function BudgetCreatedDash() {
       </div>
 
       <div>
-    {
-        itemModal&& 
-
-        <LineItemModal 
-        itemModal= {itemModal}
-        setItemModal = {setItemModal}
-        />
-      }
-
+        {itemModal && (
+          <LineItemModal
+            itemModal={itemModal}
+            setItemModal={setItemModal}
+            budgetId={budgetItem.budgetId}
+          />
+        )}
       </div>
     </main>
   );
