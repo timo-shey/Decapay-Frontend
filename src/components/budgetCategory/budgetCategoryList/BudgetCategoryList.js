@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./BudgetCategoryList.css";
 
 function BudgetCategoryList() {
@@ -45,8 +45,8 @@ function BudgetCategoryList() {
           <div className="frame-8754-bER">
             <img className="plus-iZw" src="/assets/plus-zeD.png" />
             <div className="create-budget-TnR">Create Budget</div>
-          </div>
-        </div>
+         </div>
+       </div>
       </div>
     </div>
   );
