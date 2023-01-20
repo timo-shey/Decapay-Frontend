@@ -1,39 +1,48 @@
 import React, { useState } from "react";
 import "./SignUp.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function SignUp() {
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({});
 
   //Post Method
   const handleChange = (e) => {
     e.persist();
-    const {name, value} = e.target;
-    setFormData({...formData,[name] : value});
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = { formData };
-    console.log(data.formData);
+
+    console.log(formData);
 
     /* Post Method */
 
-    fetch("http://127.0.0.1:8082/api/v1/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data.formData),
-    }).then((res) => {
-      console.log("Saved to DataBase");
-      return res.json();
-    }).then((res) => {
-      console.log(res);
-    });
-    
-  };
+    try {
+      const response = await axios.post(
+        "http://localhost:8082/api/v1/auth/register",
+        formData
+      );
+      console.log(response);
+      navigate("/login");
+    } catch (error) {
+      console.log(error.message);
+    }
 
+    // fetch("http://127.0.0.1:8082/", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(data.formData),
+    // }).then((res) => {
+    //   console.log("Saved to DataBase");
+    //   return res.json();
+    // }).then((res) => {
+    //   console.log(res);
+    // });
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -112,7 +121,12 @@ function SignUp() {
                     />
                   </div>
                 </div>
-                <input className="frame-3-jku" value="Sign Up" type="submit" onClick={handleChange} />
+                <input
+                  className="frame-3-jku"
+                  value="Sign Up"
+                  type="submit"
+                  onClick={handleChange}
+                />
               </div>
               <p class="already-have-an-account-login-FDT">
                 <span class="already-have-an-account-login-FDT-sub-0">
