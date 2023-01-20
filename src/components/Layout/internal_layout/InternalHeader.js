@@ -1,9 +1,14 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import InternalSidebar from "./internalSidebar";
 
 const InternalHeader = () => {
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    const token= localStorage.getItem("token")==null?navigate("/login"):"";
+  },[]);
+
 
   const handleLogout = () => {
     localStorage.removeItem("token");

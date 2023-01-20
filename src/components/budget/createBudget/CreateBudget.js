@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import "./CreateBudget.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import ResponseMessage from "../../modals/globalmodals/ResponseMessage";
+import Loader from "../../../globalresources/Loader";
 
 function CreateBudget() {
   const [period, changePeriod] = useState(null);
   const [formData, setFormData] = useState({});
+
+
+  const [responseMessage, setResponseMessage] =useState(null);
+  const [loaderStatus, setLoaderStatus]=useState(false);
 
   const handleChange = (e) => {
     e.persist();
@@ -15,6 +21,9 @@ function CreateBudget() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    setResponseMessage(null);
+    setLoaderStatus(true);
 
     const data = { ...formData, period };
 
@@ -48,8 +57,12 @@ function CreateBudget() {
       );
 
       console.log(response);
+      setResponseMessage("Budget added");
+      setLoaderStatus(false);
     } catch (error) {
       console.log(error.message);
+      setResponseMessage("error : "+ error.message + "- Budget not added");
+      setLoaderStatus(false);
     }
   };
 
@@ -154,10 +167,13 @@ function CreateBudget() {
               <input className="frame-3-WA5" value="Done" type="submit" />
             </Link> */}
 
-            <input className="frame-3-WA5" value="Done" type="submit" />
+            <button className="frame-3-WA5" type="submit" >
+             Done <Loader status={loaderStatus}/>
+            </button>
           </div>
         </form>
       </div>
+      {responseMessage && <ResponseMessage message={responseMessage}  />}
     </div>
   );
 }
