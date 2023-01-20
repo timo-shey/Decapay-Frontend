@@ -136,3 +136,7 @@ button{
   margin-bottom: 15px;
   font-size: 15px;
 }
+
+span.modal-title{
+  font-size:20px;
+}

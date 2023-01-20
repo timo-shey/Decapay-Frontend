@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import "./SignUp.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Loader from "../../globalresources/Loader";
+import ResponseMessage from "../modals/globalmodals/ResponseMessage";
 
 function SignUp() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
+
+  const [responseMessage, setResponseMessage] =useState(null);
+  const [loaderStatus, setLoaderStatus]=useState(false);
 
   //Post Method
   const handleChange = (e) => {
@@ -17,6 +22,9 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setResponseMessage(null);
+    setLoaderStatus(true);
+
     console.log(formData);
 
     /* Post Method */
@@ -27,9 +35,13 @@ function SignUp() {
         formData
       );
       console.log(response);
+      setLoaderStatus(false);
+      setResponseMessage("Registration successful");
       navigate("/login");
     } catch (error) {
       console.log(error.message);
+      setLoaderStatus(false);
+      setResponseMessage("error : "+ error.message + "- an error has occurred");
     }
 
     // fetch("http://127.0.0.1:8082/", {
@@ -121,12 +133,10 @@ function SignUp() {
                     />
                   </div>
                 </div>
-                <input
-                  className="frame-3-jku"
-                  value="Sign Up"
-                  type="submit"
-                  onClick={handleChange}
-                />
+                <button className="frame-3-jku"  value="Sign Up"
+                        type="submit">
+                  Sign up <Loader status={loaderStatus}/>
+                </button>
               </div>
               <p class="already-have-an-account-login-FDT">
                 <span class="already-have-an-account-login-FDT-sub-0">
@@ -142,6 +152,7 @@ function SignUp() {
           </div>
         </div>
       </div>
+      {responseMessage && <ResponseMessage message={responseMessage}  />}
     </form>
   );
 }

@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
-// import EmailModal from "../../passwordreset/EmailModal";
+import EmailModal from "../../passwordreset/EmailModal";
 import axios from "axios";
+import ResponseMessage from "../modals/globalmodals/ResponseMessage";
+import Loader from "../../globalresources/Loader";
 
 function Login() {
+  const [loaderStatus, setLoaderStatus]=useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
 
@@ -20,6 +23,7 @@ function Login() {
 
   const handleClick = (e) => {
     e.preventDefault();
+    setLoaderStatus(true);
     mainData(formData);
   };
 
@@ -33,10 +37,12 @@ function Login() {
       const token = await res.data;
       localStorage.setItem("token", token);
       console.log(token);
+      setLoaderStatus(false);
 
       navigate("/internal_link/dashboard");
     } catch (error) {
       console.log(error);
+      setLoaderStatus(false);
     }
   };
 
@@ -84,12 +90,9 @@ function Login() {
                         <p className="remember-login-WL9">Remember login</p>
                       </div>
                     </div>
-                    <input
-                      className="frame-3-dvZ"
-                      value="Sign In"
-                      type="submit"
-                      onClick={handleClick}
-                    />
+                    <button className="frame-3-dvZ" type="submit">Sign in
+                      <Loader status={loaderStatus}/>
+                    </button>
                   </div>
                   <p className="forgot-password-L4H">
                     <a href="#!" onClick={handleOpen}>
@@ -128,11 +131,12 @@ function Login() {
       </form>
 
       <div>
-        {/* <EmailModal
+        {<EmailModal
           handleClose={handleClose}
           handleOpen={handleOpen}
           open={open}
-        /> */}
+        />}
+
       </div>
     </>
   );

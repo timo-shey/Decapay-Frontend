@@ -1,8 +1,46 @@
-import React from "react";
+import React, {useState} from "react";
 import "./CreateCategory.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import ResponseMessage from "../../modals/globalmodals/ResponseMessage";
+import Loader from "../../../globalresources/Loader";
 
 function CreateCategory() {
+  const [budgetCategoryName, setBudgetCategoryName]= useState("");
+  const [responseMessage, setResponseMessage] =useState(null);
+
+  const [loaderStatus, setLoaderStatus]=useState(false);
+  const handleBudgetCategorySubmit = (e) =>{
+
+    e.preventDefault();
+
+    setResponseMessage(null);
+    setLoaderStatus(true);
+    const categoryName = {name :budgetCategoryName };
+
+    createBudgetCategory(categoryName);
+
+  }
+  const createBudgetCategory = (data) => {
+    const token = localStorage.getItem("token");
+    fetch(" http://localhost:8082/api/v1/budgets/category/create",{
+      method:"POST",
+      headers:{
+        "content-type":"application/json",
+        Authorization: `Bearer ${token}`
+      },
+      body:JSON.stringify(data)
+    }).then(response=>{
+      console.log(response);
+      setResponseMessage("Budget Category Added");
+      setLoaderStatus(false);
+    }).catch(error=>{
+      console.log(error.message);
+      setResponseMessage("error : "+ error.message + "- Budget category not added");
+      setLoaderStatus(false);
+    });
+  };
+
   return (
     <div className="create-category-decapay-Da9">
       <img className="ellipse-4-XKw" src="/assets/ellipse-4-f3X.png" />
@@ -18,24 +56,25 @@ function CreateCategory() {
 
           <div className="frame-8792-wRb">
             <div className="frame-4-uNR">
-              <form>
-                <p className="name-of-category-Tuj">Name of Category</p>
-                <input
+              <form onSubmit={handleBudgetCategorySubmit}>
+                <p className="name-of-category-Tuj" >Name of Category</p>
+                <input name="categoryName"
                   className="frame-2-PYV"
                   placeholder="Enter name of item"
+                       onChange={(e)=>setBudgetCategoryName(e.target.value)}
                 /> 
                 <br/><br/>
-                <Link
-                  className="frame-8754-GcH"
-                  to="/internal_link/budget-category-list"
-                >
-                  <button className="frame-8754-GcH">Add</button>
-                </Link>
+                  <button className="frame-8754-GcH" type="submit">Add
+                    <Loader status={loaderStatus}/>
+                  </button>
+
               </form>
             </div>
           </div>
         </div>
       </div>
+
+      {responseMessage && <ResponseMessage message={responseMessage}  />}
     </div>
   );
 }

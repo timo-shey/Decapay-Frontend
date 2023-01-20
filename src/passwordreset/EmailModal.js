@@ -13,9 +13,10 @@ const EmailModal = (props) => {
                     aria-describedby="modal-modal-description"
                 >
                     <Box className="modal-box">
-                        <button className="btnClose" onClick={props.handleClose}>X</button>
+                       <div><span class="modal-title">Reset Password</span> <button className="btnClose" onClick={props.handleClose}>X</button></div>
+
                         <input type="email" className="form-input" name="email" placeholder="Enter your registered Email Address"/>
-                        <button class="form-button"> Send</button>
+                        <button class="form-button"> Send Password Reset Link</button>
 
                     </Box>
                 </Modal>
