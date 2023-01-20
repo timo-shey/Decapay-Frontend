@@ -34,6 +34,7 @@ function CreateCategory() {
       console.log(response);
       setResponseMessage("Budget Category Added");
       setLoaderStatus(false);
+
       setBudgetCategoryName("");
     }).catch(error=>{
       console.log(error.message);
@@ -60,7 +61,7 @@ function CreateCategory() {
               <form onSubmit={handleBudgetCategorySubmit}>
                 <p className="name-of-category-Tuj" >Name of Category</p>
                 <input name="categoryName"
-                  className="frame-2-PYV"
+                  className="frame-2-PYV" value={budgetCategoryName}
                   placeholder="Enter name of item"
                        onChange={(e)=>setBudgetCategoryName(e.target.value)}
                 /> 
