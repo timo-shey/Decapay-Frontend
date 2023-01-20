@@ -1,7 +1,5 @@
 import React, {useState} from "react";
 import "./CreateCategory.css";
-import { Link } from "react-router-dom";
-import axios from "axios";
 import ResponseMessage from "../../modals/globalmodals/ResponseMessage";
 import Loader from "../../../globalresources/Loader";
 

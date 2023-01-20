@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import EmailModal from "../../passwordreset/EmailModal";
@@ -9,6 +9,11 @@ import Loader from "../../globalresources/Loader";
 function Login() {
   const [loaderStatus, setLoaderStatus]=useState(false);
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    const token= localStorage.getItem("token")==null?"":navigate("/internal_link/dashboard");
+  },[]);
+
   const [formData, setFormData] = useState({});
 
   const [open, setOpen] = React.useState(false);
