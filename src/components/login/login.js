@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
-import EmailModal from "../../passwordreset/EmailModal";
+// import EmailModal from "../../passwordreset/EmailModal";
 import axios from "axios";
 
 function Login() {
@@ -128,11 +128,11 @@ function Login() {
       </form>
 
       <div>
-        <EmailModal
+        {/* <EmailModal
           handleClose={handleClose}
           handleOpen={handleOpen}
           open={open}
-        />
+        /> */}
       </div>
     </>
   );
