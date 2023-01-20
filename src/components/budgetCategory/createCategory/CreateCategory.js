@@ -34,6 +34,7 @@ function CreateCategory() {
       console.log(response);
       setResponseMessage("Budget Category Added");
       setLoaderStatus(false);
+      setBudgetCategoryName("");
     }).catch(error=>{
       console.log(error.message);
       setResponseMessage("error : "+ error.message + "- Budget category not added");
