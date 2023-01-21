@@ -11,7 +11,7 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(()=>{
-    const token= localStorage.getItem("token")==null?"":navigate("/internal_link/dashboard");
+    const token= localStorage.getItem("token")==null?"":navigate("/decapay/dashboard");
   },[]);
 
   const [formData, setFormData] = useState({});
@@ -44,7 +44,7 @@ function Login() {
       console.log(token);
       setLoaderStatus(false);
 
-      navigate("/internal_link/dashboard");
+      navigate("/decapay/dashboard");
     } catch (error) {
       console.log(error);
       setLoaderStatus(false);

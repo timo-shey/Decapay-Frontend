@@ -57,7 +57,7 @@ function App() {
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />
 
-      <Route path="internal_link" element={<InternalLayout />}>
+      <Route path="decapay" element={<InternalLayout />}>
         <Route
           path="dashboard"
           element={

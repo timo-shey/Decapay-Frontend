@@ -163,7 +163,7 @@ function CreateBudget() {
                 />
               </div>
             </div>
-            {/* <Link to="/internal_link/budget-created" className="frame-3-WA5">
+            {/* <Link to="/decapay/budget-created" className="frame-3-WA5">
               <input className="frame-3-WA5" value="Done" type="submit" />
             </Link> */}
 
