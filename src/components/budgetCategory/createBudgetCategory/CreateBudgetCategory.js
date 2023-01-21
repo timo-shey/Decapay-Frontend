@@ -23,7 +23,7 @@ function CreateBudgetCategory() {
         <div className="frame-8754-eT3">
           <img className="plus-ykD" src="/assets/plus-FSq.png" />
 
-          <Link to="/internal_link/create-category" >
+          <Link to="/decapay/create-category" >
           <div className="create-budget-vfT">Create Budget Category</div>
           </Link>
         </div>

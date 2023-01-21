@@ -15,7 +15,7 @@ function InternalSidebar() {
           <div className="list-group list-group-flush mx-3 mt-4">
             <br />
             <Link
-              to="/internal_link/dashboard"
+              to="/decapay/dashboard"
               className="list-group-item dashboard list-group-item-action py-2 ripple"
             >
               &nbsp;&nbsp;
@@ -24,7 +24,7 @@ function InternalSidebar() {
             </Link>
             <br />
             <Link
-              to="/internal_link/create-budget"
+              to="/decapay/create-budget"
               className="list-group-item list-group-item-action py-2 ripple"
             >
               &nbsp;&nbsp;
@@ -33,7 +33,7 @@ function InternalSidebar() {
             </Link>
             <br />
             <Link
-              to="/internal_link/create-budget-category"
+              to="/decapay/create-budget-category"
               className="list-group-item list-group-item-action py-2 ripple"
             >
               &nbsp;&nbsp;

@@ -25,7 +25,7 @@ function NoBudgetCreated() {
         <div class="frame-8754-dw7">
           <img class="plus-N81" src="./assets/plus.png" />
 
-          <Link to="/internal_link/create-budget" class="create-budget-75b">
+          <Link to="/decapay/create-budget" class="create-budget-75b">
             Create Budget
           </Link>
 
