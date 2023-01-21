@@ -117,7 +117,7 @@ button{
 
 .form-button{
   width: 450px;
-  height:45px;
+  height:48px;
   color: #ffffff;
   padding: 5px  16px 5px 16px;
   background-color: #14A800;
@@ -126,6 +126,20 @@ button{
   position: relative;
   left: 0;
   margin-bottom: -5px;
+}
+
+.action-button{
+  width: 450px;
+  height:48px;
+  color: #ffffff;
+  padding: 5px  16px 5px 16px;
+  background-color: #14A800;
+  border: none;
+  font-size: 16px;
+  position: relative;
+  left: 0;
+  margin-bottom: -5px;
+  border-radius: 10px;
 }
 
 .btnClose{
@@ -139,4 +153,48 @@ button{
 
 span.modal-title{
   font-size:20px;
+}
+
+
+.item-wrapper{
+  display: flex;
+  justify-content: center;;
+  align-items: center;
+}
+
+.item-wrapper-border{
+  border: 1px solid #d9d9d9;
+ padding: 30px 30px 30px 15px;
+}
+
+.item-wrapper img{
+   width: 45px;
+  height: 45px;
+  background-color: #fff;
+}
+
+.item-wrapper table{
+  background-color:#f5f5f5;
+  border:none;
+  margin:10px;
+}
+.item-wrapper .budget-header{
+  background-color:#14a800;
+  margin:10px;
+  color:#fff;
+}
+
+
+.calender-box{
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  width:100%;
+}
+.calender-box p{
+  text-align:center;
+}
+
+.container-fluid{
+  background-color: #fff !important;
 }
