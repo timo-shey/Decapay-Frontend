@@ -16,6 +16,7 @@ import { Routes, Route } from "react-router-dom";
 import axios from "axios";
 
 import InternalLayout from "./Layout/internal_layout/InternalLayout";
+import ResetPassword from "../passwordreset/ResetPassword";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -56,6 +57,7 @@ function App() {
       <Route path="/" element={<Homepage />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />
+      <Route path="/reset-password/:token" element={<ResetPassword />}/>
 
       <Route path="decapay" element={<InternalLayout />}>
         <Route

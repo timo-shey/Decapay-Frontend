@@ -1,19 +1,21 @@
 import React, {useState} from "react";
 import "./CreateCategory.css";
-import ResponseMessage from "../../modals/globalmodals/ResponseMessage";
+import ResponseMessage from "../../../globalresources/modals/ResponseMessage";
 import Loader from "../../../globalresources/Loader";
+import {baseEndpoint} from "../../../globalresources/Config";
 
 function CreateCategory() {
   const [budgetCategoryName, setBudgetCategoryName]= useState("");
-  const [responseMessage, setResponseMessage] =useState(null);
 
-  const [loaderStatus, setLoaderStatus]=useState(false);
+  const [responseMessage, setResponseMessage] =useState(null);
+  const [isSpinning, setisSpinning]=useState(false);
+
   const handleBudgetCategorySubmit = (e) =>{
 
     e.preventDefault();
 
     setResponseMessage(null);
-    setLoaderStatus(true);
+    setisSpinning(true);
     const categoryName = {name :budgetCategoryName };
 
     createBudgetCategory(categoryName);
@@ -21,7 +23,7 @@ function CreateCategory() {
   }
   const createBudgetCategory = (data) => {
     const token = localStorage.getItem("token");
-    fetch(" http://localhost:8082/api/v1/budgets/category/create",{
+    fetch(baseEndpoint+"/api/v1/budgets/category/create",{
       method:"POST",
       headers:{
         "content-type":"application/json",
@@ -31,13 +33,13 @@ function CreateCategory() {
     }).then(response=>{
       console.log(response);
       setResponseMessage("Budget Category Added");
-      setLoaderStatus(false);
+      setisSpinning(false);
 
       setBudgetCategoryName("");
     }).catch(error=>{
       console.log(error.message);
       setResponseMessage("error : "+ error.message + "- Budget category not added");
-      setLoaderStatus(false);
+      setisSpinning(false);
     });
   };
 
@@ -65,7 +67,7 @@ function CreateCategory() {
                 /> 
                 <br/><br/>
                   <button className="frame-8754-GcH" type="submit">Add
-                    <Loader status={loaderStatus}/>
+                    <Loader status={isSpinning}/>
                   </button>
 
               </form>

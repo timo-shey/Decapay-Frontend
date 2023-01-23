@@ -4,6 +4,7 @@ import "./BudgetCreated.css";
 import axios from "axios";
 import LineItemModal from "../../modals/LineItemModals";
 import Loader from "../../../globalresources/Loader";
+import {baseEndpoint} from "../../../globalresources/Config";
 
 function BudgetCreated() {
   const token = localStorage.getItem("token");
@@ -22,7 +23,7 @@ function BudgetCreated() {
 
   const getBudgetItem = async () => {
     try {
-      const response = await axios.get("http://localhost:8082/api/v1/budgets", {
+      const response = await axios.get(baseEndpoint+"/api/v1/budgets", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

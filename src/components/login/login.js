@@ -3,11 +3,12 @@ import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import EmailModal from "../../passwordreset/EmailModal";
 import axios from "axios";
-import ResponseMessage from "../modals/globalmodals/ResponseMessage";
+import ResponseMessage from "../../globalresources/modals/ResponseMessage";
 import Loader from "../../globalresources/Loader";
+import {baseEndpoint, baseUrl} from "../../globalresources/Config";
 
 function Login() {
-  const [loaderStatus, setLoaderStatus]=useState(false);
+  const [isSpinning, setisSpinning]=useState(false);
   const navigate = useNavigate();
 
   useEffect(()=>{
@@ -28,26 +29,26 @@ function Login() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    setLoaderStatus(true);
+    setisSpinning(true);
     mainData(formData);
   };
 
   const mainData = async (data) => {
     try {
       const res = await axios.post(
-        "http://127.0.0.1:8082/api/v1/auth/signin",
+        baseEndpoint+"/api/v1/auth/signin",
         data
       );
 
       const token = await res.data;
       localStorage.setItem("token", token);
       console.log(token);
-      setLoaderStatus(false);
+      setisSpinning(false);
 
       navigate("/decapay/dashboard");
     } catch (error) {
       console.log(error);
-      setLoaderStatus(false);
+      setisSpinning(false);
     }
   };
 
@@ -96,7 +97,7 @@ function Login() {
                       </div>
                     </div>
                     <button className="frame-3-dvZ" type="submit">Sign in
-                      <Loader status={loaderStatus}/>
+                      <Loader status={isSpinning}/>
                     </button>
                   </div>
                   <p className="forgot-password-L4H">
