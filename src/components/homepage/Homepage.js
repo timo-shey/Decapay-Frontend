@@ -23,7 +23,7 @@ function Homepage(){
     <div class="frame-19-TTP">
       <div class="frame-18-yRj">
         <div class="effectively-manager-your-budget-XTF">
-        Effectively manager 
+        Effectively manage 
         <br/>
         your budget
         </div>
