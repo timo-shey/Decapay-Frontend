@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./CreateBudget.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import ResponseMessage from "../../modals/globalmodals/ResponseMessage";
+import ResponseMessage from "../../../globalresources/modals/ResponseMessage";
 import Loader from "../../../globalresources/Loader";
 
 function CreateBudget() {
@@ -11,7 +11,7 @@ function CreateBudget() {
 
 
   const [responseMessage, setResponseMessage] =useState(null);
-  const [loaderStatus, setLoaderStatus]=useState(false);
+  const [isSpinning, setisSpinning]=useState(false);
 
   const handleChange = (e) => {
     e.persist();
@@ -23,7 +23,7 @@ function CreateBudget() {
     e.preventDefault();
 
     setResponseMessage(null);
-    setLoaderStatus(true);
+    setisSpinning(true);
 
     const data = { ...formData, period };
 
@@ -58,11 +58,11 @@ function CreateBudget() {
 
       console.log(response);
       setResponseMessage("Budget added");
-      setLoaderStatus(false);
+      setisSpinning(false);
     } catch (error) {
       console.log(error.message);
       setResponseMessage("error : "+ error.message + "- Budget not added");
-      setLoaderStatus(false);
+      setisSpinning(false);
     }
   };
 
@@ -168,7 +168,7 @@ function CreateBudget() {
             </Link> */}
 
             <button className="frame-3-WA5" type="submit" >
-             Done <Loader status={loaderStatus}/>
+             Done <Loader status={isSpinning}/>
             </button>
           </div>
         </form>

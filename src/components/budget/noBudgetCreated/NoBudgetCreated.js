@@ -3,7 +3,6 @@ import "./NoBudgetCreated.css";
 import { Link } from "react-router-dom";
 
 function NoBudgetCreated() {
-
   return (
     <div class="no-budget-created-decapay-WRF">
       <div class="frame-8755-Ec9">
@@ -34,5 +33,4 @@ function NoBudgetCreated() {
     </div>
   );
 }
-
 export default NoBudgetCreated;

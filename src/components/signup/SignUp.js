@@ -3,14 +3,15 @@ import "./SignUp.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Loader from "../../globalresources/Loader";
-import ResponseMessage from "../modals/globalmodals/ResponseMessage";
+import ResponseMessage from "../../globalresources/modals/ResponseMessage";
+import {baseEndpoint} from "../../globalresources/Config";
 
 function SignUp() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
 
   const [responseMessage, setResponseMessage] =useState(null);
-  const [loaderStatus, setLoaderStatus]=useState(false);
+  const [isSpinning, setisSpinning]=useState(false);
 
   //Post Method
   const handleChange = (e) => {
@@ -23,7 +24,7 @@ function SignUp() {
     e.preventDefault();
 
     setResponseMessage(null);
-    setLoaderStatus(true);
+    setisSpinning(true);
 
     console.log(formData);
 
@@ -31,16 +32,16 @@ function SignUp() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8082/api/v1/auth/register",
+        baseEndpoint+"/api/v1/auth/register",
         formData
       );
       console.log(response);
-      setLoaderStatus(false);
+      setisSpinning(false);
       setResponseMessage("Registration successful");
       navigate("/login");
     } catch (error) {
       console.log(error.message);
-      setLoaderStatus(false);
+      setisSpinning(false);
       setResponseMessage("error : "+ error.message + "- an error has occurred");
     }
 
@@ -135,7 +136,7 @@ function SignUp() {
                 </div>
                 <button className="frame-3-jku"  value="Sign Up"
                         type="submit">
-                  Sign up <Loader status={loaderStatus}/>
+                  Sign up <Loader status={isSpinning}/>
                 </button>
               </div>
               <p class="already-have-an-account-login-FDT">

@@ -2,6 +2,7 @@ import React from "react";
 import "./BudgetCategoryList.css";
 import BudgetCategoryCard from "./BudgetCategoryCard";
 import { useState, useEffect } from "react";
+import {baseEndpoint} from "../../../globalresources/Config";
 
 function BudgetCategoryList() {
 
@@ -19,7 +20,7 @@ function BudgetCategoryList() {
   const fetchBudgetCategories = async ()=> {
     const token = localStorage.getItem("token");
 
-    const res = await fetch('http://localhost:8082/api/v1/budgets/category', {
+    const res = await fetch(baseEndpoint+'/api/v1/budgets/category', {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,

@@ -3,6 +3,7 @@ import "./BudgetCreatedDash.css";
 import { Calendar } from "react-calendar";
 import LineItemModal from "../../modals/LineItemModals";
 import axios from "axios";
+import {baseEndpoint} from "../../../globalresources/Config";
 
 function BudgetCreatedDash() {
   const token = localStorage.getItem("token");
@@ -21,7 +22,7 @@ function BudgetCreatedDash() {
 
   const getBudgetItem = async () => {
     try {
-      const response = await axios.get("http://localhost:8082/api/v1/budgets", {
+      const response = await axios.get(baseEndpoint+"/api/v1/budgets", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
