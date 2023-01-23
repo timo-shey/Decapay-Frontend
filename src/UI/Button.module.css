@@ -8,6 +8,7 @@
     font-size: 16px;
     position: relative;
     left: 50px;
+    border-radius: 10px;
 
 }
 .button:hover{
