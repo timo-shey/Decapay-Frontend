@@ -65,6 +65,9 @@ body {
   border: solid 0.1rem rgba(0, 0, 0, 0.1599999964);
   flex-shrink: 0;
 }
+.frame-8669-JAD,.frame-2-B13,.frame-3-kyF,.frame-3-dvZ{
+  border-radius: 10px;
+}
 .login-decapay-3rZ .frame-8671-N89 .frame-8669-JAD .login-Dny {
   margin-bottom: 4.9rem;
   font-size: 3.2rem;

@@ -24,6 +24,9 @@ input {
   overflow: hidden;
   background-color: #ffffff;
 }
+.frame-8768-seH,.frame-8756-uUV{
+  border-radius: 10px;
+}
 .dashboard-decapay-qhb .ellipse-4-9iH {
   width: 18.918rem;
   height: 19.5744rem;
@@ -43,6 +46,7 @@ input {
   top: 15.4rem;
   border: solid 0.1rem #d9d9d9;
 }
+
 .dashboard-decapay-qhb .frame-8768-seH .frame-8770-mzZ {
   width: 100%;
   height: 100%;
