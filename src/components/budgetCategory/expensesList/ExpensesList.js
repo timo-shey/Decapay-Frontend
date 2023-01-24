@@ -5,12 +5,15 @@ import moment from "moment";
 import { Params, useParams } from "react-router-dom";
 import {baseEndpoint} from "../../../globalresources/Config";
 import { Link } from "react-router-dom";
-
+import Pagination from 'react-paginate';
 
 function ExpensesList() {
   const token = localStorage.getItem("token");
   const [expenses, setExpenses] = useState([]);
   const {id} = useParams()
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
 
   useEffect(() => {
     if (token !== null) {
@@ -49,11 +52,11 @@ function ExpensesList() {
           </div>
           
           
-          <p className="transportation-expenses-7r9">Transportation Expenses</p>
+          <p className="transportation-expenses-7r9"></p>
          
         </div>
       
-        {expenses.map((expense) => (
+        {expenses.slice(currentPage * itemsPerPage, (currentPage + 1)* itemsPerPage).map((expense) => (
         <div className="frame-8779-3jo" key={expense.id}>
           <div className="frame-8775-Br1">
             <div className="frame-8772-Vrh">
@@ -71,9 +74,15 @@ function ExpensesList() {
               <p className="pm-z4h">{moment(expense.createdAt).format("h:mm A")}</p>
             </div>
           </div>
+          
          
         </div>
+        
         ))}
+        <Pagination
+        pageCount={Math.ceil(expenses.length / itemsPerPage)}
+        onPageChange={({selected})=> setCurrentPage(selected)}
+        />
       </div>
     </div>
   );
