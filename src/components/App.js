@@ -17,6 +17,7 @@ import axios from "axios";
 
 import InternalLayout from "./Layout/internal_layout/InternalLayout";
 import ResetPassword from "../passwordreset/ResetPassword";
+import EditProfile from "./editProfile/EditProfile";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -58,6 +59,7 @@ function App() {
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />
       <Route path="/reset-password/:token" element={<ResetPassword />}/>
+
 
       <Route path="decapay" element={<InternalLayout />}>
         <Route
@@ -101,6 +103,7 @@ function App() {
 
         <Route path="expenses-list/:id" element={<ExpensesList />} />
         {/* <Route path='logout' element={<BudgetCreated/>}/> */}
+        <Route path="profile" element={<EditProfile/>}/>
       </Route>
 
     </Routes>
