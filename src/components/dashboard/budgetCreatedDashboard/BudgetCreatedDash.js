@@ -128,6 +128,7 @@ function BudgetCreatedDash() {
                   </div>{" "}
                 </div>{" "}
               </div>{" "}
+
               {budgetLineItemList.map((item) => (
                 <div key={item.lineItemId} className="frame-8771-Kww">
                   {" "}
@@ -189,66 +190,11 @@ function BudgetCreatedDash() {
                       </div>{" "}
                     </div>{" "}
                   </div>{" "}
-                  {/* <div className="frame-8771-MjX">
-                  <div className="frame-8745-Up9">
-                  <div className="transportation-1p5">Transportation</div>
-                  <div className="projected-amount-n5500-wxd">
-                  <span className="projected-amount-n5500-wxd-sub-0">                        Projected amount -{" "}
-                  </span>
-                  <span className="projected-amount-n5500-wxd-sub-1">
-                  N5,500
-                  </span>
-                  </div>
-                  <div className="frame-8751-v3s">
-                  <div className="amount-so-far-n2500-GtR">
-                  <span className="amount-so-far-n2500-GtR-sub-0">                          Amount so far -{" "}
-                  </span>
-                  <span className="amount-so-far-n2500-GtR-sub-1">                          N2,500
-                  </span>
-                  </div>
-                  <div className="view-expenses-3nh">View expenses</div>                    </div>
-                  </div>
-                  <div className="frame-8746-Na5">
-                  <div className="frame-8639-vLh">
-                  <div className="log-TLd">Log</div>
-                  <img
-                  className="arrow-up-right-oQV"
-                  src="./assets/arrow-up-right-LPT.png"
-                  />
-                  </div>
-                  <div className="item-375-XLV">3.75%</div>
-                  </div>
-                  </div> */}
-                  {/* <div className="frame-8770-DUD">
-                  <div className="frame-8745-kDF">
-                  <div className="clothing-gch">Clothing</div>
-                  <div className="projected-amount-n5500-E8R">
-                  <span className="projected-amount-n5500-E8R-sub-0">                        Projected amount -{" "}
-                  </span>
-                  <span className="projected-amount-n5500-E8R-sub-1">
-                  N5,500
-                  </span>
-                  </div>
-                  <div className="frame-8751-Bxm">
-                  <div className="amount-so-far-n2500-MMT">
-                  <span className="amount-so-far-n2500-MMT-sub-0">                          Amount so far -{" "}
-                  </span>
-                  <span className="amount-so-far-n2500-MMT-sub-1">                          N2,500
-                  </span> 
-                  </div>
-                  <div className="view-expenses-8mX">View expenses</div>                    </div>
-                  </div>
-                  <div className="frame-8746-sUD">
-                  <div className="frame-8639-1aR">
-                  <div className="log-MPP">Log</div>                      <img                        className="arrow-up-right-gwT"
-                  src="./assets/arrow-up-right-bow.png"
-                  />
-                  </div>
-                  <div className="item-375-DgV">3.75%</div>
-                  </div>
-                  </div> */}
                 </div>
               ))}
+
+
+              
             </div>{" "}
             <div className="frame-8754-Jhw">
               {" "}
