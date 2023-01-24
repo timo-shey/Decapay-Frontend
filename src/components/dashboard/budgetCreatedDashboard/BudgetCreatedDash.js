@@ -143,9 +143,7 @@ function BudgetCreatedDash() {
                     </div>
                     <div className="frame-8746-nPb">
                       <div className="frame-8639-XMB">
-                      <Link to="/decapay/expenses-list" >
                         <div className="log-ewb">Log</div>
-                        </Link>
                         <img
                           className="arrow-up-right-xSV"
                           src="./assets/arrow-up-right-PXP.png"
