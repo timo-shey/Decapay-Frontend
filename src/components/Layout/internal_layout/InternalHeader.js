@@ -88,7 +88,7 @@ const InternalHeader = () => {
                 aria-expanded="false"
               >
                 <img
-                  src="/assets/ellipse-8-bg-CXT.png"
+                  src="/assets/avatar.png"
                   className="rounded-circle"
                   height={22}
                   alt=""
