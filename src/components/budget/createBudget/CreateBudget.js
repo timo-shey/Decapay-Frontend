@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useRef } from "react";
 import "./CreateBudget.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -10,6 +10,7 @@ function CreateBudget() {
   const [period, changePeriod] = useState(null);
   const [formData, setFormData] = useState({});
 
+  const budgetForm = useRef(null);
 
   const [responseMessage, setResponseMessage] =useState(null);
   const [isSpinning, setisSpinning]=useState(false);
@@ -60,7 +61,8 @@ function CreateBudget() {
       console.log(response);
       setResponseMessage("Budget added");
       setisSpinning(false);
-      elementSelector("form").reset();
+      budgetForm.current.reset();
+     // elementSelector("form").reset();
     } catch (error) {
       console.log(error.message);
       setResponseMessage("error : "+ error.message + "- Budget not added");
@@ -94,7 +96,7 @@ function CreateBudget() {
           </div>
           <p className="create-budget-th7">Create Budget</p>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} ref={budgetForm}>
           <div className="frame-8666-RS9">
             <div className="frame-6-yiZ">
               <div className="frame-4-vNu">
