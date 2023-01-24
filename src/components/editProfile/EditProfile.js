@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useRef, useState} from "react"
 import {Link, useNavigate} from "react-router-dom";
 import Loader from "../../globalresources/Loader";
 import ResponseMessage from "../../globalresources/modals/ResponseMessage";
@@ -11,9 +11,35 @@ function EditProfile(){
     const [formData, setFormData] = useState({});
     const [file , setFile] = useState();
     const navigate = useNavigate();
+    const inputRef = useRef(null)
+    const hiddenFileInput = useRef(null);
+    const [imageToForm, setImageToForm] = useState(null);
+    const END_POINT_URL = baseEndpoint+"/api/v1/user/upload-profile-picture";
+
+    const handleClick = () =>{
+        hiddenFileInput.current.click();
+ };
+
+    const addImageToForm = (e) => {
+        const reader = new FileReader();
+        if (e.target.files[0]){
+            reader.readAsDataURL(e.target.files[0]);
+            reader.onload = (e) => {
+                setImageToForm(e.target.result);
+            };
+        }
+    };
+
+    const removeImage = () =>{setImageToForm(null)};
+
+
+
+
 
     const [isSpinning, setisSpinning]=useState(false);
     const [responseMessage, setResponseMessage] =useState(null);
+
+
 
     const handleChange = (e) => {
         e.persist();
@@ -43,34 +69,97 @@ function EditProfile(){
         }
     };
 
+    const handleUpload = (e) => {
+        e.preventDefault();
+        if (!inputRef.current.value) return;
+        const formData = new FormData();
+        formData.append("file", imageToForm);
+        console.log("image posted: " + imageToForm);
 
+        axios      .post(END_POINT_URL, formData, {
+            headers: { Accept: "application/json" },
+        })
+            .then((response) => {
+                //inputRef.current.value = "";
+                //dispatch(addPost(response.data));
+                console.log(response.data);
+                //removeImage();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+
+
+
+    const handleFile = (e)=>{
+        setFile(e.target.files[0]);
+        console.log(e.target.files[0])
+    }
+
+    // const handleUpload = ()=>{
+    //     const token = localStorage.getItem("token");
+    //     const formData = new FormData;
+    //     formData.append('file', file);
+    //
+    //     fetch(
+    //         baseEndpoint+"/api/v1/user/upload-profile-picture",
+    //         {
+    //             method: "POST",
+    //             headers:{
+    //                 Authorization: `Bearer ${token}`
+    //             },
+    //             body: formData
+    //         }
+    //     ).then((res)=>
+    //         res.json()
+    //     ).then((result)=> {
+    //         setFile(result)
+    //         console.log('success',result)
+    //     }).catch(err =>{
+    //             console.error("Error:",err);
+    //         });
+    //
+    // }
 
     return(
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleUpload}>
             <div className="sign-up-decapay-3kM">
                 <div className="frame-8671-Yh7">
-                    <div className="frame-8670-u1s">
-                    <a
-                        className="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
-                        href="#!"
-                        id="navbarDropdownMenuLink"
-                        role="button"
-                        data-mdb-toggle="dropdown"
-                        aria-expanded="false"
-                    >
-                        <img
-                            src="/assets/ellipse-8-bg-CXT.png"
-                            className="rounded-circle profile-img"
-                            height={22}
-                            alt=""
-                            loading="lazy"
-                        />
-                    </a>
+                    {imageToForm && (
+                        <div onClick={removeImage} className="frame-8670-u1s">
+                            {/*<a*/}
+                            {/*    className="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"*/}
+                            {/*    href="#!"*/}
+                            {/*    id="navbarDropdownMenuLink"*/}
+                            {/*    role="button"*/}
+                            {/*    data-mdb-toggle="dropdown"*/}
+                            {/*    aria-expanded="false"*/}
+                            {/*>*/}
+                            <img
+                                // src={file}
+                                // className="rounded-circle profile-img"
+                                // height={22}
+                                // alt=""
+                                // loading="lazy"
+                                src={imageToForm}
+                            />
+                            {/*</a>*/}
 
-                    </div>
-                    <div>
-                        <input type="file" id="file"/>
-                        <label for ="file">Upload photo</label>
+                        </div>
+                    )}
+
+                    <div
+                        onClick={handleClick} >
+                    <p>upload image</p>
+
+                    <input ref = {hiddenFileInput} type="file"
+                           onChange={addImageToForm} accept="image/**" hidden/>
+                        {/*<input  onChange={handleFile} onClick={handleUpload} type="file" id="file"/>*/}
+                        {/*<label for ="file">Upload photo</label>*/}
+
+
                     </div>
                     <div className="frame-8669-UjB">
                         <p className="create-an-account-1z1">Edit Profile</p>
