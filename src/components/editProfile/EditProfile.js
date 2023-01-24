@@ -9,6 +9,7 @@ import "./EditProfile.css";
 
 function EditProfile(){
     const [formData, setFormData] = useState({});
+    const [file , setFile] = useState();
     const navigate = useNavigate();
 
     const [isSpinning, setisSpinning]=useState(false);
@@ -42,6 +43,8 @@ function EditProfile(){
         }
     };
 
+
+
     return(
         <form onSubmit={handleSubmit}>
             <div className="sign-up-decapay-3kM">
@@ -63,6 +66,11 @@ function EditProfile(){
                             loading="lazy"
                         />
                     </a>
+
+                    </div>
+                    <div>
+                        <input type="file" id="file"/>
+                        <label for ="file">Upload photo</label>
                     </div>
                     <div className="frame-8669-UjB">
                         <p className="create-an-account-1z1">Edit Profile</p>
