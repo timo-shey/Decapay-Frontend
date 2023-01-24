@@ -205,3 +205,13 @@ span.modal-title{
   justify-content: center;
   align-items: center;
 }
+
+.budgetCategoryList{
+  position:relative;
+
+}
+
+.budgetCategoryList img{
+  position:absolute;
+  right:20px;
+}
