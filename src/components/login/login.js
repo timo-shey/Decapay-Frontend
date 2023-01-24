@@ -42,8 +42,17 @@ function Login() {
 
       const result = await res.data;
       localStorage.setItem("token", result.token);
+      localStorage.setItem("phoneNumber", result.phoneNumber);
+      localStorage.setItem("imagePath", result.imagePath);
+      localStorage.setItem("lastName", result.lastName);
+      localStorage.setItem("firstName", result.firstName);
+      localStorage.setItem("userId", result.userId);
+      localStorage.setItem("email", result.email);
       console.log(result);
+      console.log(result.token);
+      console.log(result.imagePath);
       setisSpinning(false);
+
 
       navigate("/decapay/dashboard");
     } catch (error) {
