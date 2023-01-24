@@ -87,7 +87,7 @@ function App() {
           element={<BudgetCreatedDash />}
         />
 
-        <Route path="expenses-list" element={<ExpensesList />} />
+        <Route path="expenses-list/:id" element={<ExpensesList />} />
         {/* <Route path='logout' element={<BudgetCreated/>}/> */}
       </Route>
 
