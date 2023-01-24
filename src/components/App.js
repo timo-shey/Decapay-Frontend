@@ -72,6 +72,18 @@ function App() {
             )
           }
         />
+
+          <Route 
+          path="budget"
+          element= {
+            budgetList.length === 0 ? (
+              <NoBudgetCreated />
+            ) : <BudgetList />
+          }
+
+          />
+        
+
         <Route path="create-budget" element={<CreateBudget />} />
         <Route path="budget-created" element={<BudgetCreated />} />
         <Route
