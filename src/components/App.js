@@ -58,8 +58,7 @@ function App() {
       <Route path="/" element={<Homepage />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />
-      <Route path="/reset-password/:token" element={<ResetPassword />}/>
-
+      <Route path="/reset-password/:token" element={<ResetPassword />} />
 
       <Route path="decapay" element={<InternalLayout />}>
         <Route
@@ -75,16 +74,12 @@ function App() {
           }
         />
 
-          <Route 
+        <Route
           path="budget"
-          element= {
-            budgetList.length === 0 ? (
-              <NoBudgetCreated />
-            ) : <BudgetList />
+          element={
+            budgetList.length === 0 ? <NoBudgetCreated /> : <BudgetList />
           }
-
-          />
-        
+        />
 
         <Route path="create-budget" element={<CreateBudget />} />
         <Route path="budget-created" element={<BudgetCreated />} />
@@ -101,11 +96,10 @@ function App() {
           element={<BudgetCreatedDash />}
         />
 
-        <Route path="expenses-list/:id" element={<ExpensesList />} />
+        <Route path="expenses-list/:id/:category" element={<ExpensesList />} />
         {/* <Route path='logout' element={<BudgetCreated/>}/> */}
-        <Route path="profile" element={<EditProfile/>}/>
+        <Route path="profile" element={<EditProfile />} />
       </Route>
-
     </Routes>
   );
 }
