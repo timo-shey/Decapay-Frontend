@@ -40,9 +40,9 @@ function Login() {
         data
       );
 
-      const token = await res.data;
-      localStorage.setItem("token", token);
-      console.log(token);
+      const result = await res.data;
+      localStorage.setItem("token", result.token);
+      console.log(result);
       setisSpinning(false);
 
       navigate("/decapay/dashboard");
