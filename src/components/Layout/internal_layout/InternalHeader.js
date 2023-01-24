@@ -5,15 +5,16 @@ import InternalSidebar from "./internalSidebar";
 const InternalHeader = () => {
   const navigate = useNavigate();
 
+
   useEffect(()=>{
     const token= localStorage.getItem("token")==null?navigate("/login"):"";
   },[]);
-
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
   };
+
 
   return (
     <header>

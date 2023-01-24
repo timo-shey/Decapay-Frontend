@@ -1,21 +1,33 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Logout from "../../dashboard/logout/Logout";
+import {elementSelector} from "../../../globalresources/elementSelector";
 
 function InternalSidebar() {
   const [logoutModal, setLogoutModal] = useState(false);
+  const [pageCount, setPageCount] = useState(0);
+
+  const  handlePageRendering = () => {
+    setPageCount(pageCount+1);
+
+  }
+
+  // elementSelector(".dashboard").addEventListener("click",function (){
+  //   return handlePageRendering();
+  // });
+
 
   return (
     <main>
       <nav
-        id="sidebarMenu"
+        id="sidebarMenu" key={pageCount}
         className="collapse d-lg-block sidebar collapse bg-white"
       >
         <div className="position-sticky">
           <div className="list-group list-group-flush mx-3 mt-4">
             <br />
             <Link
-              to="/decapay/dashboard"
+              to="/decapay/dashboard" onClick={handlePageRendering}
               className="list-group-item dashboard list-group-item-action py-2 ripple"
             >
               &nbsp;&nbsp;
