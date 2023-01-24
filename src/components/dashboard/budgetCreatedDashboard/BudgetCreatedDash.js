@@ -105,7 +105,7 @@ function BudgetCreatedDash() {
                         <div className="percentage-xmX">Percentage</div>{" "}
                         <div className="item-375-Hoo">
                           {" "}
-                          {budgetItem.percentage}%
+                          {budgetItem.percentage * 100}%
                         </div>{" "}
                       </div>{" "}
                       <img
@@ -124,11 +124,10 @@ function BudgetCreatedDash() {
                   <div>
                     {" "}
                     <Calendar onChange={onChange} value={value} />{" "}
-                    <h5>{value.toString()}</h5>{" "}
+                    <p style={{ fontSize: "11px" }}>{value.toString()}</p>{" "}
                   </div>{" "}
                 </div>{" "}
               </div>{" "}
-
               {budgetLineItemList.map((item) => (
                 <div key={item.lineItemId} className="frame-8771-Kww">
                   {" "}
@@ -141,7 +140,7 @@ function BudgetCreatedDash() {
                         {" "}
                         <span className="projected-amount-n5500-TRs-sub-0">
                           {" "}
-                          Projected amount -{" "}
+                          Projected amount:&nbsp;&nbsp;
                         </span>{" "}
                         <span className="projected-amount-n5500-TRs-sub-1">
                           {" "}
@@ -154,7 +153,7 @@ function BudgetCreatedDash() {
                           {" "}
                           <span className="amount-so-far-n2500-hUd-sub-0">
                             {" "}
-                            Amount so far -{" "}
+                            Amount Spent:&nbsp;&nbsp;
                           </span>{" "}
                           <span className="amount-so-far-n2500-hUd-sub-1">
                             {" "}
@@ -164,7 +163,10 @@ function BudgetCreatedDash() {
                         <Link
                           to={{
                             pathname:
-                              "/decapay/expenses-list/" + item.lineItemId,
+                              "/decapay/expenses-list/" +
+                              item.lineItemId +
+                              "/" +
+                              item.category,
                           }}
                         >
                           <div className="view-expenses-fZs">View expenses</div>
@@ -186,15 +188,12 @@ function BudgetCreatedDash() {
                       </div>{" "}
                       <div className="item-375-s3f">
                         {" "}
-                        {item.percentageSpentSoFar}%
+                        {item.percentageSpentSoFar * 100}%
                       </div>{" "}
                     </div>{" "}
                   </div>{" "}
                 </div>
               ))}
-
-
-              
             </div>{" "}
             <div className="frame-8754-Jhw">
               {" "}

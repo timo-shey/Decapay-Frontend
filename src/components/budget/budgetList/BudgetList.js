@@ -34,16 +34,20 @@ function BudgetList() {
     <main>
       <div className="budget-list-decapay-Do7">
         <div className="frame-8810-kY9">
-          <Link to="/decapay/create-budget">Create Budget</Link> <br />
+          <Link to="/decapay/create-budget">
+            <div className="cr1">Create Budget</div>
+          </Link>
+          <br />
           <br />
           <div className="frame-8809-GmP">
-            <div className="frame-8780-Q6u">
+            {/* <div className="frame-8780-Q6u">
               <img
                 className="back-arrow-94V"
                 src="/assets/back-arrow-gGh.png"
               />
               <p className="back-t25">Back</p>
-            </div>
+            </div> */}
+
             <p className="budget-list-Nxq">Budget List</p>
           </div>
           <div className="frame-8805-79j">
@@ -56,7 +60,10 @@ function BudgetList() {
               <div key={item.id} className="frame-8806-HCd">
                 <div className="frame-8805-RZj">
                   <div className="frame-8799-x3s">
-                    <p className="budget-1-monthly-hn9"> Budget {item.budgetId}</p>
+                    <p className="budget-1-monthly-hn9">
+                      {" "}
+                      Budget {item.budgetId}
+                    </p>
                     <img className="option-qdT" src="/assets/option-2Qq.png" />
                   </div>
                   <div className="frame-8800-nHo">
@@ -69,12 +76,11 @@ function BudgetList() {
                   </div>
                   <div className="frame-8802-zoB">
                     <p className="percentage-9RB">Percentage</p>
-                    <p className="item-397-J3B">{item.percentage * 100}</p>
+                    <p className="item-397-J3B">{item.percentage * 100}%</p>
                   </div>
                 </div>
               </div>
             ))}
-
           </div>
         </div>
         <div className="pagination-button-group-CmP">

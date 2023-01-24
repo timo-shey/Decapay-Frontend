@@ -16,6 +16,8 @@ const LogModal = ({ setLogModal, logModal, lineId }) => {
   });
 
   const handleChange = (event) => {
+    event.persist();
+    event.preventDefault();
     const { value, name } = event.target;
     setForm((prevForm) => ({
       ...prevForm,
@@ -23,8 +25,9 @@ const LogModal = ({ setLogModal, logModal, lineId }) => {
     }));
   };
 
-  const handleClick = () => {
-    console.log(form);
+  const handleClick = (e) => {
+    e.persist();
+    e.preventDefault();
 
     const createExpense = async () => {
       try {
@@ -74,36 +77,28 @@ const LogModal = ({ setLogModal, logModal, lineId }) => {
               <p className={styles.title}>Log Item</p>
             </div>
             <form>
-              <label className={styles.label} htmlFor="amountspent">
-                {" "}
-                Amount Spent
-              </label>{" "}
+              {/* <br /> */}
+              <input
+                className={styles.amount}
+                id="amountspent"
+                type="number"
+                name="amount"
+                onChange={handleChange}
+                value={form.amount}
+                placeholder="Enter Amount Spent"
+              />
               <br />
-              <div className={styles.amount}>
-                <input
-                  id="amountspent"
-                  type="number"
-                  name="amount"
-                  onChange={handleChange}
-                  value={form.amount}
-                  placeholder="N0.00"
-                />
-              </div>
-              <label className={styles.label} htmlFor="description">
-                {" "}
-                Description
-              </label>{" "}
               <br />
-              <div className={styles.amount}>
-                <input
-                  id="description"
-                  type="text"
-                  name="description"
-                  onChange={handleChange}
-                  value={form.description}
-                  placeholder="Type description here"
-                />
-              </div>
+              <input
+                className={styles.amount}
+                id="description"
+                type="text"
+                name="description"
+                onChange={handleChange}
+                value={form.description}
+                placeholder="Type description here"
+              />
+              <br />
               <br />
               <button className={styles.btntwo} onClick={handleClick}>
                 Save
