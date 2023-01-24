@@ -6,10 +6,15 @@ import { Params, useParams } from "react-router-dom";
 import { baseEndpoint } from "../../../globalresources/Config";
 import { Link } from "react-router-dom";
 
+import Pagination from "react-paginate";
+
 function ExpensesList() {
   const token = localStorage.getItem("token");
   const [expenses, setExpenses] = useState([]);
   const { id, category } = useParams();
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
 
   useEffect(() => {
     if (token !== null) {
@@ -47,31 +52,37 @@ function ExpensesList() {
             </Link>
           </div>
 
-          <p className="transportation-expenses-7r9">{category}</p>
+          <p className="transportation-expenses-7r9"></p>
         </div>
 
-        {expenses.map((expense) => (
-          <div className="frame-8779-3jo" key={expense.id}>
-            <div className="frame-8775-Br1">
-              <div className="frame-8772-Vrh">
-                <p className="amount-qff">Amount</p>
-                <p className="n5000-AC9">{expense.amount}</p>
-              </div>
-              <div className="frame-8773-HXf">
-                <p className="description-Eho">Description</p>
-                <p className="lorem-ipsum-dolor-sit-amet-rus-consectetur-adipiscing-elit-aWm">
-                  {expense.description}.{" "}
-                </p>
-              </div>
-              <div className="frame-8774-5yK">
-                <p className="time-logged-qxV">Time Logged</p>
-                <p className="pm-z4h">
-                  {moment(expense.createdAt).format("h:mm A")}
-                </p>
+        {expenses
+          .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
+          .map((expense) => (
+            <div className="frame-8779-3jo" key={expense.id}>
+              <div className="frame-8775-Br1">
+                <div className="frame-8772-Vrh">
+                  <p className="amount-qff">Amount</p>
+                  <p className="n5000-AC9">{expense.amount}</p>
+                </div>
+                <div className="frame-8773-HXf">
+                  <p className="description-Eho">Description</p>
+                  <p className="lorem-ipsum-dolor-sit-amet-rus-consectetur-adipiscing-elit-aWm">
+                    {expense.description}.{" "}
+                  </p>
+                </div>
+                <div className="frame-8774-5yK">
+                  <p className="time-logged-qxV">Time Logged</p>
+                  <p className="pm-z4h">
+                    {moment(expense.createdAt).format("h:mm A")}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        <Pagination
+          pageCount={Math.ceil(expenses.length / itemsPerPage)}
+          onPageChange={({ selected }) => setCurrentPage(selected)}
+        />
       </div>
     </div>
   );

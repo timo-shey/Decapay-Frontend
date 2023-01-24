@@ -4,10 +4,12 @@ import Loader from "../../globalresources/Loader";
 import ResponseMessage from "../../globalresources/modals/ResponseMessage";
 import axios from "axios";
 import {baseEndpoint} from "../../globalresources/Config";
+import "./EditProfile.css";
 
 
 function EditProfile(){
     const [formData, setFormData] = useState({});
+    const [file , setFile] = useState();
     const navigate = useNavigate();
 
     const [isSpinning, setisSpinning]=useState(false);
@@ -41,10 +43,13 @@ function EditProfile(){
         }
     };
 
+
+
     return(
         <form onSubmit={handleSubmit}>
             <div className="sign-up-decapay-3kM">
                 <div className="frame-8671-Yh7">
+                    <div className="frame-8670-u1s">
                     <a
                         className="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
                         href="#!"
@@ -55,12 +60,18 @@ function EditProfile(){
                     >
                         <img
                             src="/assets/ellipse-8-bg-CXT.png"
-                            className="rounded-circle"
+                            className="rounded-circle profile-img"
                             height={22}
                             alt=""
                             loading="lazy"
                         />
                     </a>
+
+                    </div>
+                    <div>
+                        <input type="file" id="file"/>
+                        <label for ="file">Upload photo</label>
+                    </div>
                     <div className="frame-8669-UjB">
                         <p className="create-an-account-1z1">Edit Profile</p>
                         <div className="frame-8668-vbB">
@@ -129,7 +140,7 @@ function EditProfile(){
                                 </div>
                                 <button className="frame-3-jku" value="Sign Up"
                                         type="submit">
-                                    Sign up <Loader status={isSpinning}/>
+                                    Save Changes <Loader status={isSpinning}/>
                                 </button>
                             </div>
                             <p className="already-have-an-account-login-FDT">
