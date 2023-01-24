@@ -3,23 +3,10 @@ import "./BudgetCreatedDash.css";
 import { Calendar } from "react-calendar";
 import LineItemModal from "../../modals/LineItemModals";
 import axios from "axios";
-import { Params, useParams } from "react-router-dom";
-import {baseEndpoint} from "../../../globalresources/Config";
-import { Link } from "react-router-dom";
-
-function BudgetCreatedDash() {
-  const token = localStorage.getItem("token");
-  const params = useParams();
-
-  const [value, onChange] = useState(new Date());
-  const [itemModal, setItemModal] = useState(false);
-  const [lineItem, setLineItem] = useState(null);
-  
-  const [budgetItem, setBudgetItem] = useState({});
-  const [budgetLineItemList, setBudgetLineItemList] = useState([]);
- 
 import { baseEndpoint } from "../../../globalresources/Config";
 import LogModal from "../../modals/LogModal";
+import { Link } from "react-router-dom";
+
 function BudgetCreatedDash() {
   const token = localStorage.getItem("token");
   const [value, onChange] = useState(new Date());
@@ -42,20 +29,11 @@ function BudgetCreatedDash() {
       });
       const item = response.data.reverse()[0];
       setBudgetItem(item);
-      console.log(item);
       setBudgetLineItemList(item.lineItemRests);
     } catch (error) {
       console.log(error.message);
     }
   };
-
-
-  const createBudgetHandler = () => {
-    setItemModal(true);
-  };
-
-
-
   const createBudgetHandler = () => {
     setItemModal(true);
   };
@@ -151,7 +129,6 @@ function BudgetCreatedDash() {
                 </div>{" "}
               </div>{" "}
               {budgetLineItemList.map((item) => (
-                
                 <div key={item.lineItemId} className="frame-8771-Kww">
                   {" "}
                   <div className="frame-8747-sTf">
@@ -181,17 +158,16 @@ function BudgetCreatedDash() {
                           <span className="amount-so-far-n2500-hUd-sub-1">
                             {" "}
                             N{item.amountSpentSoFar}
-                          </span>
-                        </div>
-                        <Link to={{pathname:"/decapay/expenses-list/" + item.lineItemId}}  >
-                        <div className="view-expenses-fZs">View expenses</div>
-                        </Link>
-                      </div>
-                    </div>
-
                           </span>{" "}
                         </div>{" "}
-                        <div className="view-expenses-fZs">View expenses</div>{" "}
+                        <Link
+                          to={{
+                            pathname:
+                              "/decapay/expenses-list/" + item.lineItemId,
+                          }}
+                        >
+                          <div className="view-expenses-fZs">View expenses</div>
+                        </Link>{" "}
                       </div>{" "}
                     </div>{" "}
                     <div className="frame-8746-nPb">
@@ -294,11 +270,6 @@ function BudgetCreatedDash() {
             budgetId={budgetItem.budgetId}
           />
         )}
-      </div>
-
-      <div>
-        
-      </div>
       </div>{" "}
       <div>
         {" "}
