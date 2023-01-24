@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import ResponseMessage from "../../../globalresources/modals/ResponseMessage";
 import Loader from "../../../globalresources/Loader";
+import {elementSelector} from "../../../globalresources/elementSelector";
 
 function CreateBudget() {
   const [period, changePeriod] = useState(null);
@@ -59,6 +60,7 @@ function CreateBudget() {
       console.log(response);
       setResponseMessage("Budget added");
       setisSpinning(false);
+      elementSelector("form").reset();
     } catch (error) {
       console.log(error.message);
       setResponseMessage("error : "+ error.message + "- Budget not added");
