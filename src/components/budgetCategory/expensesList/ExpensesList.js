@@ -1,86 +1,79 @@
-import React from "react";
 import "./ExpensesList.css";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import moment from "moment";
+import { Params, useParams } from "react-router-dom";
+import {baseEndpoint} from "../../../globalresources/Config";
+import { Link } from "react-router-dom";
+
 
 function ExpensesList() {
+  const token = localStorage.getItem("token");
+  const [expenses, setExpenses] = useState([]);
+  const {id} = useParams()
 
+  useEffect(() => {
+    if (token !== null) {
+      getExpenses();
+    }
+  }, []);
+
+  const getExpenses = async () => {
+    try {
+      const response = await axios.get(baseEndpoint+"/api/v1/expenses/"+id+"/expenses", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const expenseLists = response.data;
+      console.log(expenseLists)
+      setExpenses(expenseLists.content);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <div className="expenses-decapay-du3">
       <img className="ellipse-4-yCD" src="/assets/ellipse-4-NUq.png" />
       <div className="frame-8782-VRT">
+      
         <div className="frame-8781-pTj">
+        
           <div className="frame-8780-k6V">
+          
             <img className="back-arrow-gkq" src="/assets/back-arrow-URw.png" />
-            <p className="back-241">Back</p>
+            <Link>
+            <div className="back-241">Back</div>
+            </Link>
           </div>
+          
+          
           <p className="transportation-expenses-7r9">Transportation Expenses</p>
+         
         </div>
-        <div className="frame-8779-3jo">
+      
+        {expenses.map((expense) => (
+        <div className="frame-8779-3jo" key={expense.id}>
           <div className="frame-8775-Br1">
             <div className="frame-8772-Vrh">
               <p className="amount-qff">Amount</p>
-              <p className="n5000-AC9">N5,000</p>
+              <p className="n5000-AC9">{expense.amount}</p>
             </div>
             <div className="frame-8773-HXf">
               <p className="description-Eho">Description</p>
               <p className="lorem-ipsum-dolor-sit-amet-rus-consectetur-adipiscing-elit-aWm">
-                Lorem ipsum dolor sit amet, rus consectetur adipiscing elit.{" "}
+                {expense.description}.{" "}
               </p>
             </div>
             <div className="frame-8774-5yK">
               <p className="time-logged-qxV">Time Logged</p>
-              <p className="pm-z4h">01:45PM</p>
+              <p className="pm-z4h">{moment(expense.createdAt).format("h:mm A")}</p>
             </div>
           </div>
-          <div className="frame-8776-VXF">
-            <div className="frame-8772-pZX">
-              <p className="amount-mzZ">Amount</p>
-              <p className="n5000-84R">N5,000</p>
-            </div>
-            <div className="frame-8773-TsP">
-              <p className="description-D5s">Description</p>
-              <p className="lorem-ipsum-dolor-sit-amet-rus-consectetur-adipiscing-elit-Ytq">
-                Lorem ipsum dolor sit amet, rus consectetur adipiscing elit.{" "}
-              </p>
-            </div>
-            <div className="frame-8774-TW1">
-              <p className="time-logged-RBw">Time Logged</p>
-              <p className="pm-kzu">01:45PM</p>
-            </div>
-          </div>
-          <div className="frame-8777-spd">
-            <div className="frame-8772-oTP">
-              <p className="amount-FqB">Amount</p>
-              <p className="n5000-znm">N5,000</p>
-            </div>
-            <div className="frame-8773-99s">
-              <p className="description-5JR">Description</p>
-              <p className="lorem-ipsum-dolor-sit-amet-rus-consectetur-adipiscing-elit-1xm">
-                Lorem ipsum dolor sit amet, rus consectetur adipiscing elit.{" "}
-              </p>
-            </div>
-            <div className="frame-8774-93P">
-              <p className="time-logged-hqb">Time Logged</p>
-              <p className="pm-3uT">01:45PM</p>
-            </div>
-          </div>
-          <div className="frame-8778-xmX">
-            <div className="frame-8772-uAy">
-              <p className="amount-TCV">Amount</p>
-              <p className="n5000-bZb">N5,000</p>
-            </div>
-            <div className="frame-8773-M2y">
-              <p className="description-hcd">Description</p>
-              <p className="lorem-ipsum-dolor-sit-amet-rus-consectetur-adipiscing-elit-enm">
-                Lorem ipsum dolor sit amet, rus consectetur adipiscing elit.{" "}
-              </p>
-            </div>
-            <div className="frame-8774-agR">
-              <p className="time-logged-YdF">Time Logged</p>
-              <p className="pm-tBK">01:45PM</p>
-            </div>
-          </div>
+         
         </div>
+        ))}
       </div>
     </div>
   );

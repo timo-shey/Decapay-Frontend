@@ -20,7 +20,7 @@ input {
 .dashboard-decapay-qhb {
   width: 100%;
   height: 130.9rem;
-  position: relative;
+  /* position: relative; */
   overflow: hidden;
   background-color: #ffffff;
 }
