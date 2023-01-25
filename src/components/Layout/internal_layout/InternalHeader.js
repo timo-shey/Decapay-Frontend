@@ -1,15 +1,21 @@
-import React,{useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import InternalSidebar from "./internalSidebar";
 
 const InternalHeader = () => {
   const navigate = useNavigate();
-  const firstname = localStorage.getItem("firstName")
-  const lastname = localStorage.getItem("lastName")
+
+
+  const[firstname, setFirstName] = useState("");
+  const[lastname, setLastName] = useState("");
+
+  const url = localStorage.getItem("imagePath")
 
 
   useEffect(()=>{
     const token= localStorage.getItem("token")==null?navigate("/login"):"";
+    setFirstName(localStorage.getItem("firstName"))
+    setLastName(localStorage.getItem("lastName"))
   },[]);
 
   const handleLogout = () => {
@@ -90,7 +96,7 @@ const InternalHeader = () => {
                 aria-expanded="false"
               >
                 <img
-                  src="/assets/avatar.png"
+                  src= {url}
                   className="rounded-circle"
                   height={22}
                   alt=""

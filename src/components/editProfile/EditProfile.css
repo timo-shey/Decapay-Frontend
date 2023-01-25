@@ -304,9 +304,9 @@ body {
     height: 175px !important;
 }
 
-input[type= "file"]{
-    display:none;
-}
+/*input[type= "file"]{*/
+/*    display:none;*/
+/*}*/
 label{
     height: 30px;
     color: white;
