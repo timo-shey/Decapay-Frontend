@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import InternalSidebar from "./internalSidebar";
+import "./InternalHeader.css"
+import { Dropdown, DropdownButton, DropdownItem } from 'react-bootstrap';
 
 const InternalHeader = () => {
   const navigate = useNavigate();
@@ -22,7 +24,6 @@ const InternalHeader = () => {
     localStorage.removeItem("token");
     navigate("/login");
   };
-
 
   return (
     <header>
@@ -86,7 +87,19 @@ const InternalHeader = () => {
             </li>
 
             {/* Avatar */}
+            <div>
+              <DropdownButton
+                  id="dropdown-basic-button"
+                  title="Profile"
+                  variant="success"
+                  className="large-button"
+              >
+                <Dropdown.Item as={Link} to="profile" className="dropdown-item">Edit Profile</Dropdown.Item>
+                <Dropdown.Item onClick={handleLogout} className="dropdown-item">Log out</Dropdown.Item>
+              </DropdownButton>
+            </div>
             <li className="nav-item dropdown">
+
               <a
                 className="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
                 href="#!"
