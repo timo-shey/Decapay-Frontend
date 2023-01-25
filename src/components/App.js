@@ -18,6 +18,7 @@ import axios from "axios";
 import InternalLayout from "./Layout/internal_layout/InternalLayout";
 import ResetPassword from "../passwordreset/ResetPassword";
 import EditProfile from "./editProfile/EditProfile";
+import UploadPhoto from "./editProfile/UploadPhoto";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -99,6 +100,7 @@ function App() {
         <Route path="expenses-list/:id/:category" element={<ExpensesList />} />
         {/* <Route path='logout' element={<BudgetCreated/>}/> */}
         <Route path="profile" element={<EditProfile />} />
+        <Route path= "upload" element={<UploadPhoto/>}/>
       </Route>
     </Routes>
   );

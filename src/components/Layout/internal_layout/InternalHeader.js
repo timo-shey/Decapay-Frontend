@@ -94,6 +94,7 @@ const InternalHeader = () => {
                   variant="success"
                   className="large-button"
               >
+                <Dropdown.Item as={Link} to="upload" className="dropdown-item">Upload Photo</Dropdown.Item>
                 <Dropdown.Item as={Link} to="profile" className="dropdown-item">Edit Profile</Dropdown.Item>
                 <Dropdown.Item onClick={handleLogout} className="dropdown-item">Log out</Dropdown.Item>
               </DropdownButton>
@@ -112,7 +113,7 @@ const InternalHeader = () => {
                   src= {url}
                   className="rounded-circle"
                   height={22}
-                  alt=""
+                  alt="/assets/avatar.png"
                   loading="lazy"
                 />
                 &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;

@@ -14,7 +14,7 @@ function EditProfile(){
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-    const [img, setImg] = useState();
+
 
     const navigate = useNavigate();
     const END_POINT_URL = baseEndpoint+"/api/v1/user/upload-profile-picture";
@@ -28,16 +28,15 @@ function EditProfile(){
         const phone = localStorage.getItem("phoneNumber");
         const lastname = localStorage.getItem("lastName");
         const firstname = localStorage.getItem("firstName");
-        const url = localStorage.getItem("imagePath");
 
         setFirstName(firstname);
         setLastName(lastname);
         setPhoneNumber(phone);
-        setImageUrl(url)
+
     }, []);
 
-    const [image, setImage] = useState(null);
-    const [imageUrl, setImageUrl]= useState('');
+    // const [image, setImage] = useState(null);
+    // const [imageUrl, setImageUrl]= useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -71,68 +70,44 @@ function EditProfile(){
     };
 
     //Handle File
-    const handleFile = (e)=>{
-        setImage(e.target.files[0]);
-        console.log(e.target.files[0])
-    }
+    // const handleFile = (e)=>{
+    //     setImage(e.target.files[0]);
+    //     console.log(e.target.files[0])
+    // }
 
-    const handleUpload = async (e)=>{
-        e.preventDefault();
-        const token = localStorage.getItem("token");
-        const formData = new FormData;
-        formData.append('file', image);
+    // const handleUpload = async (e)=>{
+    //     e.preventDefault();
+    //     const token = localStorage.getItem("token");
+    //     const formData = new FormData;
+    //     formData.append('file', image);
 
-        fetch(
-            baseEndpoint + "/api/v1/user/upload-profile-picture",
-            {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
-                body: formData
-            }
-        ).then((res) =>
-            res.json()
-        ).then((result) => {
-            setImageUrl(result.imageUrl)
-            localStorage.setItem("imagePath",result.imageUrl);
-            console.log('success', result)
-        }).catch((error)=>{
-            console.log(error)
-        });
-
-
-    }
+    //     fetch(
+    //         baseEndpoint + "/api/v1/user/upload-profile-picture",
+    //         {
+    //             method: "POST",
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`
+    //             },
+    //             body: formData
+    //         }
+    //     ).then((res) =>
+    //         res.json()
+    //     ).then((result) => {
+    //         setImageUrl(result.imageUrl)
+    //         localStorage.setItem("imagePath",result.imageUrl);
+    //         console.log('success', result)
+    //     }).catch((error)=>{
+    //         console.log(error)
+    //     });
+    //
+    //
+    // }
 
     return(
         <div className="sign-up-decapay-3kM">
             <div className="frame-8671-Yh7">
                 <div className="frame-8670-u1s">
-                    <a
-                        className="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
-                        href="#!"
-                        id="navbarDropdownMenuLink"
-                        role="button"
-                        data-mdb-toggle="dropdown"
-                        aria-expanded="false"
-                    >
-                        <img
-                            src={imageUrl}
-                            className="rounded-circle profile-img"
-                            height={22}
-                            alt=""
-                            loading="lazy"
-                        />
-                    </a>
                 </div>
-                <div>
-                    <form onSubmit={handleUpload}>
-                        <button type="submit" className="btn btn-success  mb-3 mx-4"><input type="file" onChange={handleFile}/></button>
-                        <button type="submit" className="btn btn-success btn-lg mb-3">Upload</button>
-                    </form>
-                </div>
-{/*=============================================================================*/}
-
                 <div className="frame-8669-UjB">
                     <p className="create-an-account-1z1">Edit Profile</p>
                     <div className="frame-8668-vbB">
