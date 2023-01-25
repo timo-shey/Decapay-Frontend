@@ -215,3 +215,25 @@ span.modal-title{
   position:absolute;
   right:20px;
 }
+
+.dropdown-bg{
+  background-color:black;
+}
+
+img.dropdown-image{
+  opacity: 0.9 !important;
+}
+
+.budgetCategoryList{
+  position : relative;
+}
+
+.button-dropdown {
+  position:absolute;
+  right: 20px;
+}
+
+.form-input-modal{
+
+ // width:
+}
