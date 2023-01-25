@@ -35,7 +35,6 @@ function BudgetCategory() {
 
     return (
         <>
-            {alert(list.length)}
             {list.length>0 ?<BudgetCategoryList list={list} /> : <CreateBudgetCategory />}
 
         </>
