@@ -103,7 +103,7 @@ const InternalHeader = () => {
                   loading="lazy"
                 />
                 &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                <h2> {firstname +" "+ lastname}</h2>
+                <h2 className="profile-name"> {firstname +" "+ lastname}</h2>
                 &nbsp;&nbsp; &nbsp;&nbsp;
               </a>
               <ul
