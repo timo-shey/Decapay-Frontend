@@ -4,6 +4,8 @@ import InternalSidebar from "./internalSidebar";
 
 const InternalHeader = () => {
   const navigate = useNavigate();
+  const firstname = localStorage.getItem("firstName")
+  const lastname = localStorage.getItem("lastName")
 
 
   useEffect(()=>{
@@ -95,7 +97,7 @@ const InternalHeader = () => {
                   loading="lazy"
                 />
                 &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                <p> Patrick </p>
+                <h2> {firstname +" "+ lastname}</h2>
                 &nbsp;&nbsp; &nbsp;&nbsp;
               </a>
               <ul
