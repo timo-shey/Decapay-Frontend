@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {baseEndpoint} from "../../../globalresources/Config";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -13,22 +13,29 @@ import Loader from "../../../globalresources/Loader";
         const [responseMessage, setResponseMessage] = useState(null);
         const [isSpinning, setisSpinning] = useState(false);
 
-        setBudgetCatName(props.budgetCategoryName);
+        //setBudgetCatName(props.budgetCategoryName);
+            //alert(budgetCatName)
+        //
+        // useEffect(()=>{
+        //     if(props.budgetCategoryName!==""){
+        //         setBudgetCatName(props.budgetCategoryName);
+        //     }
+        //
+        // },[budgetCatName],)
 
         const handleBudgetCategorySubmit = (e) => {
-
-
+            e.preventDefault();
 
             setResponseMessage(null);
             setisSpinning(true);
             const categoryName = {name: budgetCatName};
 
             editBudgetCategory(categoryName);
-            e.preventDefault();
+
         }
         const editBudgetCategory = (data) => {
             const token = localStorage.getItem("token");
-            fetch(baseEndpoint + "api/v1/budgets/category/update/"+props.id, {
+            fetch(baseEndpoint + "/api/v1/budgets/category/update/"+props.budgetCategoryId, {
                 method: "PUT",
                 headers: {
                     "content-type": "application/json",
@@ -65,9 +72,11 @@ import Loader from "../../../globalresources/Loader";
                                        className="frame-2-PYV form-input" value={budgetCatName}
                                        placeholder="Enter name of item"
                                        onChange={(e) => setBudgetCatName(e.target.value)}
+                                       readOnly={false}
                                 />
                                 <br/><br/>
-                                <button className="frame-8754-GcH form-button" type="submit">Add
+                                {responseMessage && <span className="text-success responseStatus">{responseMessage}</span>}
+                                <button className="frame-8754-GcH form-button" type="submit">Update
                                     <Loader status={isSpinning}/>
                                 </button>
                             </form>

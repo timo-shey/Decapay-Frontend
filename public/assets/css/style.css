@@ -214,10 +214,15 @@ span.modal-title{
 .budgetCategoryList img{
   position:absolute;
   right:20px;
+  top :5px;
 }
 
 .dropdown-bg{
-  background-color:black;
+  background-color:#fbfbfb;
+}
+
+.dropdown-bg:hover {
+  background-color:#fbfbfb;
 }
 
 img.dropdown-image{
@@ -233,7 +238,4 @@ img.dropdown-image{
   right: 20px;
 }
 
-.form-input-modal{
 
- // width:
-}
