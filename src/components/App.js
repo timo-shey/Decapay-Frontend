@@ -7,7 +7,7 @@ import BudgetCreated from "./dashboard/budgetCreated/BudgetCreated";
 import CreateBudget from "./budget/createBudget/CreateBudget";
 import CreateBudgetCategory from "./budgetCategory/createBudgetCategory/CreateBudgetCategory";
 import CreateCategory from "./budgetCategory/createCategory/CreateCategory";
-import BudgetCategoryList from "./budgetCategory/budgetCategoryList/BudgetCategoryList";
+import BudgetCategory from "./budgetCategory/budgetCategoryList/BudgetCategory";
 import BudgetList from "./budget/budgetList/BudgetList";
 import ExpensesList from "./budgetCategory/expensesList/ExpensesList";
 import BudgetCreatedDash from "./dashboard/budgetCreatedDashboard/BudgetCreatedDash";
@@ -88,7 +88,7 @@ function App() {
           element={<CreateBudgetCategory />}
         />
         <Route path="create-category" element={<CreateCategory />} />
-        <Route path="budget-category-list" element={<BudgetCategoryList />} />
+        <Route path="budget-category" element={<BudgetCategory />} />
         <Route path="budget-list" element={<BudgetList />} />
 
         <Route

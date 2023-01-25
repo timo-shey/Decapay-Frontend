@@ -45,7 +45,7 @@ function InternalSidebar() {
             </Link>
             <br />
             <Link
-              to="/decapay/create-budget-category"
+              to="/decapay/budget-category"
               className="list-group-item list-group-item-action py-2 ripple"
             >
               &nbsp;&nbsp;
