@@ -5,6 +5,8 @@ import ResponseMessage from "../../globalresources/modals/ResponseMessage";
 import axios from "axios";
 import {baseEndpoint} from "../../globalresources/Config";
 import "./EditProfile.css";
+import expenseListModal from "../modals/ExpenseListModal";
+import {elementSelector} from "../../globalresources/elementSelector";
 
 
 function EditProfile(){
@@ -62,7 +64,6 @@ function EditProfile(){
         localStorage.setItem("phoneNumber", result.phoneNumber);
         localStorage.setItem("lastName", result.lastName);
         localStorage.setItem("firstName", result.firstName);
-
         setFirstName(result.firstName)
         setLastName(result.lastName)
     };
@@ -92,10 +93,12 @@ function EditProfile(){
             res.json()
         ).then((result) => {
             setImageUrl(result.imageUrl)
+            localStorage.setItem("imagePath",result.imageUrl);
             console.log('success', result)
         }).catch((error)=>{
             console.log(error)
         });
+
 
     }
 
