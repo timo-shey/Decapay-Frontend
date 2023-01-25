@@ -66,6 +66,8 @@ function EditProfile(){
         localStorage.setItem("firstName", result.firstName);
         setFirstName(result.firstName)
         setLastName(result.lastName)
+
+        navigate("")
     };
 
     //Handle File
@@ -125,8 +127,8 @@ function EditProfile(){
                 </div>
                 <div>
                     <form onSubmit={handleUpload}>
-                        <input type="file" onChange={handleFile}/>
-                        <button type="submit" >Upload</button>
+                        <button type="submit" className="btn btn-success  mb-3 mx-4"><input type="file" onChange={handleFile}/></button>
+                        <button type="submit" className="btn btn-success btn-lg mb-3">Upload</button>
                     </form>
                 </div>
 {/*=============================================================================*/}
